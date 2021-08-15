@@ -20,6 +20,18 @@ F0 "USB" 50
 F1 "USB_CONN/2137160001.sch" 50
 $EndSheet
 $Sheet
+S 1500 3000 2000 1500
+U 606F3C8D
+F0 "Power" 50
+F1 "Power/file606F3C8C.sch" 50
+$EndSheet
+$Sheet
+S 1500 5000 2000 1500
+U 606F3CD9
+F0 "MCU" 50
+F1 "M480/file606F3CD8.sch" 50
+$EndSheet
+$Sheet
 S 4500 1000 2000 1500
 U 606F3D2A
 F0 "Codec" 50
@@ -74,17 +86,5 @@ S 4500 3000 2000 1500
 U 608CB111
 F0 "Pin header" 50
 F1 "Header/file608CB110.sch" 50
-$EndSheet
-$Sheet
-S 1500 5000 2000 1500
-U 606F3CD9
-F0 "MCU" 50
-F1 "M480/file606F3CD8.sch" 50
-$EndSheet
-$Sheet
-S 1500 3000 2000 1500
-U 606F3C8D
-F0 "Power" 50
-F1 "Power/file606F3C8C.sch" 50
 $EndSheet
 $EndSCHEMATC
