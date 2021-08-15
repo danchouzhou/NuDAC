@@ -1,0 +1,6 @@
+(fp_lib_table
+  (lib (name 2137160001)(type KiCad)(uri ${KIPRJMOD}/USB_CONN/2137160001.pretty)(options "")(descr ""))
+  (lib (name 2SJ3080-000111F)(type KiCad)(uri ${KIPRJMOD}/NAU88L25YGB/2SJ3080-000111F.pretty)(options "")(descr ""))
+  (lib (name PTS820)(type KiCad)(uri ${KIPRJMOD}/MCU/PTS820.pretty)(options "")(descr ""))
+  (lib (name APA-104-2020-5mA)(type KiCad)(uri ${KIPRJMOD}/Header/APA-104-2020-5mA.pretty)(options "")(descr ""))
+)

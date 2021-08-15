@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP APA-104-2020-5mA
+D RGB LED with integrated controller
+K RGB LED NeoPixel addressable
+F http://neon-world.com/uploads/soft/20210506/1620282805.pdf
+$ENDCMP
+#
+#End Doc Library

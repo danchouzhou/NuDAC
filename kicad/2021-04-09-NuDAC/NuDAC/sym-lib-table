@@ -1,0 +1,9 @@
+(sym_lib_table
+  (lib (name M482ZGCAE)(type Legacy)(uri ${KIPRJMOD}/M480/M482ZGCAE.lib)(options "")(descr ""))
+  (lib (name NAU88L25YGB)(type Legacy)(uri ${KIPRJMOD}/NAU88L25YGB/NAU88L25YGB.lib)(options "")(descr ""))
+  (lib (name MCP1811)(type Legacy)(uri ${KIPRJMOD}/Power/MCP1811.lib)(options "")(descr ""))
+  (lib (name TPS2065CDBVR-2)(type Legacy)(uri ${KIPRJMOD}/USB_CONN/TPS2065CDBVR-2.lib)(options "")(descr ""))
+  (lib (name NuDAC-rescue)(type Legacy)(uri ${KIPRJMOD}/NuDAC-rescue.lib)(options "")(descr ""))
+  (lib (name 2SJ3080-000111F)(type Legacy)(uri ${KIPRJMOD}/NAU88L25YGB/2SJ3080-000111F.lib)(options "")(descr ""))
+  (lib (name APA-104-2020-5mA)(type Legacy)(uri ${KIPRJMOD}/Header/APA-104-2020-5mA.lib)(options "")(descr ""))
+)

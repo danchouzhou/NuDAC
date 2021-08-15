@@ -1,6 +1,12 @@
 # For PCBs designed using KiCad: http://www.kicad-pcb.org/
 # Format documentation: http://kicad-pcb.org/help/file-formats/
 
+*.7z
+*.zip
+datasheet
+reference
+workspace
+
 # Temporary files
 *.000
 *.bak

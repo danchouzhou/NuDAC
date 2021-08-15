@@ -1,0 +1,287 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 2 6
+Title "NuDAC"
+Date "2021-06-02"
+Rev "1.0.0"
+Comp "DANCHOUZHOU"
+Comment1 "Copyright © Danny Chou, all rights reserved."
+Comment2 "danchouzhou@gmail.com"
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L NuDAC-rescue:USB_C_Receptacle_USB2.0-Connector J?
+U 1 1 606F4615
+P 3650 4050
+AR Path="/606F4615" Ref="J?"  Part="1" 
+AR Path="/606F3289/606F4615" Ref="J1"  Part="1" 
+F 0 "J1" H 3757 4917 50  0000 C CNN
+F 1 "2137160001" H 3757 4826 50  0000 C CNN
+F 2 "2137160001:2137160001" H 3800 4050 50  0001 C CNN
+F 3 "https://www.usb.org/sites/default/files/documents/usb_type-c.zip" H 3800 4050 50  0001 C CNN
+	1    3650 4050
+	1    0    0    -1  
+$EndComp
+$Comp
+L NuDAC-rescue:R-Device R1
+U 1 1 606F5CED
+P 4600 3650
+F 0 "R1" V 4393 3650 50  0000 C CNN
+F 1 "5K1" V 4600 3650 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 4530 3650 50  0001 C CNN
+F 3 "~" H 4600 3650 50  0001 C CNN
+	1    4600 3650
+	0    1    1    0   
+$EndComp
+$Comp
+L NuDAC-rescue:R-Device R2
+U 1 1 606F60FE
+P 4600 3750
+F 0 "R2" V 4393 3750 50  0000 C CNN
+F 1 "5K1" V 4600 3750 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 4530 3750 50  0001 C CNN
+F 3 "~" H 4600 3750 50  0001 C CNN
+	1    4600 3750
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	4250 3750 4450 3750
+Wire Wire Line
+	4250 3650 4450 3650
+Wire Wire Line
+	4950 3650 4750 3650
+Wire Wire Line
+	4950 3750 4750 3750
+$Comp
+L NuDAC-rescue:GND-power #PWR03
+U 1 1 606F672B
+P 4950 3650
+F 0 "#PWR03" H 4950 3400 50  0001 C CNN
+F 1 "GND" V 4955 3522 50  0000 R CNN
+F 2 "" H 4950 3650 50  0001 C CNN
+F 3 "" H 4950 3650 50  0001 C CNN
+	1    4950 3650
+	0    -1   -1   0   
+$EndComp
+$Comp
+L NuDAC-rescue:GND-power #PWR04
+U 1 1 606F6B13
+P 4950 3750
+F 0 "#PWR04" H 4950 3500 50  0001 C CNN
+F 1 "GND" V 4955 3622 50  0000 R CNN
+F 2 "" H 4950 3750 50  0001 C CNN
+F 3 "" H 4950 3750 50  0001 C CNN
+	1    4950 3750
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	4250 3450 4450 3450
+Wire Wire Line
+	4450 3450 4450 3250
+$Comp
+L NuDAC-rescue:VBUS-power #PWR02
+U 1 1 606F6F7A
+P 4450 3250
+F 0 "#PWR02" H 4450 3100 50  0001 C CNN
+F 1 "VBUS" H 4465 3423 50  0000 C CNN
+F 2 "" H 4450 3250 50  0001 C CNN
+F 3 "" H 4450 3250 50  0001 C CNN
+	1    4450 3250
+	1    0    0    -1  
+$EndComp
+$Comp
+L NuDAC-rescue:R-Device R3
+U 1 1 606F7561
+P 4600 4050
+F 0 "R3" V 4393 4050 50  0000 C CNN
+F 1 "33R" V 4600 4050 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 4530 4050 50  0001 C CNN
+F 3 "~" H 4600 4050 50  0001 C CNN
+	1    4600 4050
+	0    1    1    0   
+$EndComp
+$Comp
+L NuDAC-rescue:R-Device R4
+U 1 1 606F7A8C
+P 4600 4150
+F 0 "R4" V 4393 4150 50  0000 C CNN
+F 1 "33R" V 4600 4150 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 4530 4150 50  0001 C CNN
+F 3 "~" H 4600 4150 50  0001 C CNN
+	1    4600 4150
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	4250 3950 4250 4050
+Wire Wire Line
+	4250 4150 4250 4250
+Wire Wire Line
+	4250 4050 4450 4050
+Connection ~ 4250 4050
+Wire Wire Line
+	4250 4150 4450 4150
+Connection ~ 4250 4150
+Wire Wire Line
+	4750 4050 5000 4050
+Wire Wire Line
+	5000 4150 4750 4150
+Text GLabel 5000 4050 2    50   BiDi ~ 0
+USB_DN
+Text GLabel 5000 4150 2    50   BiDi ~ 0
+USB_DP
+NoConn ~ 4250 4550
+NoConn ~ 4250 4650
+$Comp
+L NuDAC-rescue:Ferrite_Bead_Small-Device FB1
+U 1 1 6070932A
+P 3350 5250
+F 0 "FB1" H 3250 5204 50  0000 R CNN
+F 1 "bead" H 3250 5295 50  0000 R CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 3280 5250 50  0001 C CNN
+F 3 "~" H 3350 5250 50  0001 C CNN
+	1    3350 5250
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	3350 4950 3350 5150
+Wire Wire Line
+	3650 4950 3650 5550
+Wire Wire Line
+	3350 5350 3350 5550
+Wire Wire Line
+	3350 5550 3650 5550
+Connection ~ 3650 5550
+Wire Wire Line
+	3650 5550 3650 5750
+$Comp
+L NuDAC-rescue:GND-power #PWR01
+U 1 1 6070A68B
+P 3650 5750
+F 0 "#PWR01" H 3650 5500 50  0001 C CNN
+F 1 "GND" H 3655 5577 50  0000 C CNN
+F 2 "" H 3650 5750 50  0001 C CNN
+F 3 "" H 3650 5750 50  0001 C CNN
+	1    3650 5750
+	1    0    0    -1  
+$EndComp
+$Comp
+L TPS2065CDBVR-2:TPS2065CDBVR-2 U1
+U 1 1 608A2949
+P 7350 3600
+F 0 "U1" H 7350 4015 50  0000 C CNN
+F 1 "TPS2065CDBVR-2" H 7350 3924 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-23-5" H 7350 3500 50  0001 C CNN
+F 3 "" H 7350 3500 50  0001 C CNN
+	1    7350 3600
+	1    0    0    -1  
+$EndComp
+$Comp
+L NuDAC-rescue:C-Device C1
+U 1 1 608A36BE
+P 6250 3800
+F 0 "C1" H 6365 3846 50  0000 L CNN
+F 1 "100nF" H 6365 3755 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 6288 3650 50  0001 C CNN
+F 3 "~" H 6250 3800 50  0001 C CNN
+	1    6250 3800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6850 3450 6650 3450
+Wire Wire Line
+	6650 3450 6650 3750
+Wire Wire Line
+	6650 3750 6850 3750
+Wire Wire Line
+	6650 3450 6250 3450
+Wire Wire Line
+	6250 3450 6250 3650
+Connection ~ 6650 3450
+Wire Wire Line
+	6050 3450 6250 3450
+Connection ~ 6250 3450
+Wire Wire Line
+	6250 3950 6250 4150
+Wire Wire Line
+	7350 3950 7350 4150
+$Comp
+L NuDAC-rescue:GND-power #PWR06
+U 1 1 608A942B
+P 6250 4150
+F 0 "#PWR06" H 6250 3900 50  0001 C CNN
+F 1 "GND" H 6255 3977 50  0000 C CNN
+F 2 "" H 6250 4150 50  0001 C CNN
+F 3 "" H 6250 4150 50  0001 C CNN
+	1    6250 4150
+	1    0    0    -1  
+$EndComp
+$Comp
+L NuDAC-rescue:GND-power #PWR07
+U 1 1 608A9A53
+P 7350 4150
+F 0 "#PWR07" H 7350 3900 50  0001 C CNN
+F 1 "GND" H 7355 3977 50  0000 C CNN
+F 2 "" H 7350 4150 50  0001 C CNN
+F 3 "" H 7350 4150 50  0001 C CNN
+	1    7350 4150
+	1    0    0    -1  
+$EndComp
+NoConn ~ 7850 3750
+Wire Wire Line
+	7850 3450 8050 3450
+$Comp
+L NuDAC-rescue:C-Device C2
+U 1 1 608AD596
+P 8050 3800
+F 0 "C2" H 8165 3846 50  0000 L CNN
+F 1 "100uF" H 8165 3755 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 8088 3650 50  0001 C CNN
+F 3 "~" H 8050 3800 50  0001 C CNN
+	1    8050 3800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8050 3450 8050 3650
+$Comp
+L NuDAC-rescue:GND-power #PWR08
+U 1 1 608AE6DA
+P 8050 4150
+F 0 "#PWR08" H 8050 3900 50  0001 C CNN
+F 1 "GND" H 8055 3977 50  0000 C CNN
+F 2 "" H 8050 4150 50  0001 C CNN
+F 3 "" H 8050 4150 50  0001 C CNN
+	1    8050 4150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8050 4150 8050 3950
+Wire Wire Line
+	8250 3450 8050 3450
+Connection ~ 8050 3450
+$Comp
+L NuDAC-rescue:VBUS-power #PWR05
+U 1 1 608A6B4C
+P 6050 3450
+F 0 "#PWR05" H 6050 3300 50  0001 C CNN
+F 1 "VBUS" H 6065 3623 50  0000 C CNN
+F 2 "" H 6050 3450 50  0001 C CNN
+F 3 "" H 6050 3450 50  0001 C CNN
+	1    6050 3450
+	1    0    0    -1  
+$EndComp
+$Comp
+L NuDAC-rescue:+5V-power #PWR09
+U 1 1 608AD302
+P 8250 3450
+F 0 "#PWR09" H 8250 3300 50  0001 C CNN
+F 1 "+5V" H 8265 3623 50  0000 C CNN
+F 2 "" H 8250 3450 50  0001 C CNN
+F 3 "" H 8250 3450 50  0001 C CNN
+	1    8250 3450
+	1    0    0    -1  
+$EndComp
+$EndSCHEMATC

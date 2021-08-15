@@ -1,0 +1,713 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 4 6
+Title "NuDAC"
+Date "2021-06-02"
+Rev "1.0.0"
+Comp "DANCHOUZHOU"
+Comment1 "Copyright © Danny Chou, all rights reserved."
+Comment2 "danchouzhou@gmail.com"
+Comment3 ""
+Comment4 ""
+$EndDescr
+Wire Notes Line
+	1000 1000 3000 1000
+Wire Notes Line
+	3000 1000 3000 2500
+Wire Notes Line
+	3000 2500 1000 2500
+Wire Notes Line
+	1000 2500 1000 1000
+Wire Notes Line
+	1000 3000 3000 3000
+Wire Notes Line
+	3000 3000 3000 4500
+Wire Notes Line
+	3000 4500 1000 4500
+Wire Notes Line
+	1000 4500 1000 3000
+Wire Notes Line
+	1000 5000 3000 5000
+Wire Notes Line
+	3000 5000 3000 6500
+Wire Notes Line
+	3000 6500 1000 6500
+Wire Notes Line
+	1000 6500 1000 5000
+Wire Wire Line
+	4000 3300 4500 3300
+Wire Wire Line
+	4000 3400 4500 3400
+Wire Wire Line
+	4000 3500 4500 3500
+Wire Wire Line
+	4000 3700 4500 3700
+Wire Wire Line
+	4000 3800 4500 3800
+Wire Wire Line
+	4000 3900 4500 3900
+Wire Wire Line
+	4000 4000 4500 4000
+Wire Wire Line
+	4300 4400 4500 4400
+Wire Wire Line
+	4300 4600 4300 4700
+Wire Wire Line
+	4300 4700 4500 4700
+Connection ~ 4300 4700
+Wire Wire Line
+	4300 4700 4300 4900
+$Comp
+L NuDAC-rescue:C-Device C8
+U 1 1 60712F03
+P 3950 2500
+F 0 "C8" V 3698 2500 50  0000 C CNN
+F 1 "10uF" V 3789 2500 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 3988 2350 50  0001 C CNN
+F 3 "~" H 3950 2500 50  0001 C CNN
+	1    3950 2500
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	4100 2500 4300 2500
+Wire Wire Line
+	4300 2500 4300 2300
+Connection ~ 4300 2500
+Wire Wire Line
+	4300 2500 4500 2500
+Wire Wire Line
+	3600 2500 3800 2500
+$Comp
+L NuDAC-rescue:GND-power #PWR022
+U 1 1 60713B2F
+P 3600 2500
+F 0 "#PWR022" H 3600 2250 50  0001 C CNN
+F 1 "GND" V 3605 2372 50  0000 R CNN
+F 2 "" H 3600 2500 50  0001 C CNN
+F 3 "" H 3600 2500 50  0001 C CNN
+	1    3600 2500
+	0    1    1    0   
+$EndComp
+$Comp
+L NuDAC-rescue:GND-power #PWR025
+U 1 1 60713FA9
+P 4300 4900
+F 0 "#PWR025" H 4300 4650 50  0001 C CNN
+F 1 "GND" H 4305 4727 50  0000 C CNN
+F 2 "" H 4300 4900 50  0001 C CNN
+F 3 "" H 4300 4900 50  0001 C CNN
+	1    4300 4900
+	1    0    0    -1  
+$EndComp
+$Comp
+L NuDAC-rescue:C-Device C9
+U 1 1 607142F8
+P 4150 4400
+F 0 "C9" V 3898 4400 50  0000 C CNN
+F 1 "2.2uF" V 3989 4400 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 4188 4250 50  0001 C CNN
+F 3 "~" H 4150 4400 50  0001 C CNN
+	1    4150 4400
+	0    1    1    0   
+$EndComp
+$Comp
+L NuDAC-rescue:GND-power #PWR023
+U 1 1 60714573
+P 3800 4400
+F 0 "#PWR023" H 3800 4150 50  0001 C CNN
+F 1 "GND" V 3805 4272 50  0000 R CNN
+F 2 "" H 3800 4400 50  0001 C CNN
+F 3 "" H 3800 4400 50  0001 C CNN
+	1    3800 4400
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	3800 4400 4000 4400
+Text Label 4000 3300 0    50   ~ 0
+ICE_DAT
+Text Label 4000 3400 0    50   ~ 0
+ICE_CLK
+Text Label 4000 3500 0    50   ~ 0
+nRESET
+$Comp
+L NuDAC-rescue:+3V3-power #PWR024
+U 1 1 60714F57
+P 4300 2300
+F 0 "#PWR024" H 4300 2150 50  0001 C CNN
+F 1 "+3V3" H 4315 2473 50  0000 C CNN
+F 2 "" H 4300 2300 50  0001 C CNN
+F 3 "" H 4300 2300 50  0001 C CNN
+	1    4300 2300
+	1    0    0    -1  
+$EndComp
+Text Label 4000 3900 0    50   ~ 0
+PF4
+Text Label 4000 4000 0    50   ~ 0
+PF5
+Text Label 4000 3800 0    50   ~ 0
+X12I
+Text Label 4000 3700 0    50   ~ 0
+X12O
+Wire Wire Line
+	7000 2500 6500 2500
+Wire Wire Line
+	7000 2700 6500 2700
+Wire Wire Line
+	7000 2800 6500 2800
+Wire Wire Line
+	7000 2900 6500 2900
+Wire Wire Line
+	7000 3000 6500 3000
+Wire Wire Line
+	7000 3500 6500 3500
+Wire Wire Line
+	7000 3600 6500 3600
+Wire Wire Line
+	7000 3700 6500 3700
+Wire Wire Line
+	7000 3800 6500 3800
+Wire Wire Line
+	7000 3900 6500 3900
+Wire Wire Line
+	7000 4000 6500 4000
+Wire Wire Line
+	7000 4100 6500 4100
+Wire Wire Line
+	7000 4200 6500 4200
+Wire Wire Line
+	7000 4300 6500 4300
+Wire Wire Line
+	7000 4400 6500 4400
+Wire Wire Line
+	7000 3100 6500 3100
+Wire Wire Line
+	7000 3200 6500 3200
+Wire Wire Line
+	7000 3300 6500 3300
+Wire Wire Line
+	6500 4700 7000 4700
+Text Label 7000 2500 2    50   ~ 0
+VDDIO
+Text Label 7000 2600 2    50   ~ 0
+PA0
+Text Label 7000 2700 2    50   ~ 0
+PA1
+Text Label 7000 2800 2    50   ~ 0
+PA2
+Text Label 7000 2900 2    50   ~ 0
+PA3
+Text Label 7000 3000 2    50   ~ 0
+USB_VBUS
+Text Label 7000 3100 2    50   ~ 0
+USB_D-
+Text Label 7000 3200 2    50   ~ 0
+USB_D+
+Text Label 7000 3300 2    50   ~ 0
+PA15
+Text Label 7000 3500 2    50   ~ 0
+PB0
+Text Label 7000 3600 2    50   ~ 0
+I2S0_LRCK
+Text Label 7000 3700 2    50   ~ 0
+I2S0_DO
+Text Label 7000 3800 2    50   ~ 0
+I2S0_DI
+Text Label 7000 3900 2    50   ~ 0
+I2S0_MCLK
+Text Label 7000 4000 2    50   ~ 0
+I2S0_BCLK
+Text Label 7000 4100 2    50   ~ 0
+PB12
+Text Label 7000 4200 2    50   ~ 0
+PB13
+Text Label 7000 4300 2    50   ~ 0
+PB14
+Text Label 7000 4400 2    50   ~ 0
+PB15
+Text Label 7000 4600 2    50   ~ 0
+I2C0_SDA
+Text Label 7000 4700 2    50   ~ 0
+I2C0_SCL
+$Comp
+L NuDAC-rescue:C-Device C5
+U 1 1 607D593D
+P 1750 3900
+F 0 "C5" H 1865 3946 50  0000 L CNN
+F 1 "1uF" H 1865 3855 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 1788 3750 50  0001 C CNN
+F 3 "~" H 1750 3900 50  0001 C CNN
+	1    1750 3900
+	1    0    0    -1  
+$EndComp
+$Comp
+L NuDAC-rescue:C-Device C6
+U 1 1 607D7C7D
+P 2250 3900
+F 0 "C6" H 2365 3946 50  0000 L CNN
+F 1 "100nF" H 2365 3855 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 2288 3750 50  0001 C CNN
+F 3 "~" H 2250 3900 50  0001 C CNN
+	1    2250 3900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1550 3550 1750 3550
+Wire Wire Line
+	2250 3550 2250 3750
+Wire Wire Line
+	2250 3550 2750 3550
+Connection ~ 2250 3550
+Wire Wire Line
+	1750 3550 1750 3750
+Connection ~ 1750 3550
+Wire Wire Line
+	1750 3550 2250 3550
+Wire Wire Line
+	1750 4250 1750 4050
+Wire Wire Line
+	2250 4250 2250 4050
+$Comp
+L NuDAC-rescue:GND-power #PWR019
+U 1 1 607E2FC4
+P 1750 4250
+F 0 "#PWR019" H 1750 4000 50  0001 C CNN
+F 1 "GND" H 1755 4077 50  0000 C CNN
+F 2 "" H 1750 4250 50  0001 C CNN
+F 3 "" H 1750 4250 50  0001 C CNN
+	1    1750 4250
+	1    0    0    -1  
+$EndComp
+$Comp
+L NuDAC-rescue:GND-power #PWR020
+U 1 1 607E324A
+P 2250 4250
+F 0 "#PWR020" H 2250 4000 50  0001 C CNN
+F 1 "GND" H 2255 4077 50  0000 C CNN
+F 2 "" H 2250 4250 50  0001 C CNN
+F 3 "" H 2250 4250 50  0001 C CNN
+	1    2250 4250
+	1    0    0    -1  
+$EndComp
+Text Label 2750 3550 2    50   ~ 0
+AVDD
+$Comp
+L NuDAC-rescue:+3.3V-power #PWR015
+U 1 1 607E366C
+P 1150 3550
+F 0 "#PWR015" H 1150 3400 50  0001 C CNN
+F 1 "+3.3V" H 1165 3723 50  0000 C CNN
+F 2 "" H 1150 3550 50  0001 C CNN
+F 3 "" H 1150 3550 50  0001 C CNN
+	1    1150 3550
+	1    0    0    -1  
+$EndComp
+Text Notes 1100 3200 0    100  Italic 20
+AVDD
+Wire Wire Line
+	4000 3100 4500 3100
+Text Label 4000 3100 0    50   ~ 0
+AVDD
+$Comp
+L NuDAC-rescue:Ferrite_Bead_Small-Device FB2
+U 1 1 6082C670
+P 1450 3550
+F 0 "FB2" V 1213 3550 50  0000 C CNN
+F 1 "bead" V 1304 3550 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 1380 3550 50  0001 C CNN
+F 3 "~" H 1450 3550 50  0001 C CNN
+	1    1450 3550
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	1150 3550 1350 3550
+$Comp
+L NuDAC-rescue:R-Device R9
+U 1 1 60839B40
+P 2000 5350
+F 0 "R9" V 1900 5350 50  0000 C CNN
+F 1 "10K" V 2000 5350 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 1930 5350 50  0001 C CNN
+F 3 "~" H 2000 5350 50  0001 C CNN
+	1    2000 5350
+	0    1    1    0   
+$EndComp
+$Comp
+L NuDAC-rescue:R-Device R10
+U 1 1 6083A147
+P 2000 5550
+F 0 "R10" V 1900 5550 50  0000 C CNN
+F 1 "68R" V 2000 5550 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 1930 5550 50  0001 C CNN
+F 3 "~" H 2000 5550 50  0001 C CNN
+	1    2000 5550
+	0    1    1    0   
+$EndComp
+$Comp
+L NuDAC-rescue:C-Device C7
+U 1 1 6083AA12
+P 2350 5900
+F 0 "C7" H 2465 5946 50  0000 L CNN
+F 1 "10uF" H 2465 5855 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 2388 5750 50  0001 C CNN
+F 3 "~" H 2350 5900 50  0001 C CNN
+	1    2350 5900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2150 5350 2350 5350
+Wire Wire Line
+	2350 5350 2350 5550
+Wire Wire Line
+	2150 5550 2350 5550
+Connection ~ 2350 5550
+Wire Wire Line
+	2350 5550 2350 5750
+$Comp
+L NuDAC-rescue:SW_Push-Switch SW1
+U 1 1 6083F8F4
+P 1650 5850
+F 0 "SW1" V 1604 5998 50  0000 L CNN
+F 1 "PTS820" V 1695 5998 50  0000 L CNN
+F 2 "PTS820:PTS820" H 1650 6050 50  0001 C CNN
+F 3 "~" H 1650 6050 50  0001 C CNN
+F 4 "PTS820J25MSMTRLFS" H 1650 5850 50  0001 C CNN "P/N"
+	1    1650 5850
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	1850 5550 1650 5550
+Wire Wire Line
+	1650 5550 1650 5650
+Wire Wire Line
+	1650 6250 1650 6050
+Wire Wire Line
+	2350 6250 2350 6050
+$Comp
+L NuDAC-rescue:GND-power #PWR018
+U 1 1 6084A67B
+P 1650 6250
+F 0 "#PWR018" H 1650 6000 50  0001 C CNN
+F 1 "GND" H 1655 6077 50  0000 C CNN
+F 2 "" H 1650 6250 50  0001 C CNN
+F 3 "" H 1650 6250 50  0001 C CNN
+	1    1650 6250
+	1    0    0    -1  
+$EndComp
+$Comp
+L NuDAC-rescue:GND-power #PWR021
+U 1 1 6084A9CD
+P 2350 6250
+F 0 "#PWR021" H 2350 6000 50  0001 C CNN
+F 1 "GND" H 2355 6077 50  0000 C CNN
+F 2 "" H 2350 6250 50  0001 C CNN
+F 3 "" H 2350 6250 50  0001 C CNN
+	1    2350 6250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2350 5550 2850 5550
+Wire Wire Line
+	1650 5350 1850 5350
+Text Label 2850 5550 2    50   ~ 0
+nRESET
+Text Notes 1100 5200 0    100  Italic 20
+Reset
+$Comp
+L NuDAC-rescue:R-Device R7
+U 1 1 6085985B
+P 2000 2150
+F 0 "R7" V 1900 2150 50  0000 C CNN
+F 1 "4K7" V 2000 2150 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 1930 2150 50  0001 C CNN
+F 3 "~" H 2000 2150 50  0001 C CNN
+	1    2000 2150
+	0    1    1    0   
+$EndComp
+$Comp
+L NuDAC-rescue:R-Device R6
+U 1 1 60859A3A
+P 2000 1950
+F 0 "R6" V 1900 1950 50  0000 C CNN
+F 1 "100K" V 2000 1950 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 1930 1950 50  0001 C CNN
+F 3 "~" H 2000 1950 50  0001 C CNN
+	1    2000 1950
+	0    1    1    0   
+$EndComp
+$Comp
+L NuDAC-rescue:R-Device R5
+U 1 1 60859C38
+P 2000 1750
+F 0 "R5" V 1900 1750 50  0000 C CNN
+F 1 "100K" V 2000 1750 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 1930 1750 50  0001 C CNN
+F 3 "~" H 2000 1750 50  0001 C CNN
+	1    2000 1750
+	0    1    1    0   
+$EndComp
+$Comp
+L NuDAC-rescue:R-Device R8
+U 1 1 60856B19
+P 2000 2350
+F 0 "R8" V 1900 2350 50  0000 C CNN
+F 1 "4K7" V 2000 2350 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 1930 2350 50  0001 C CNN
+F 3 "~" H 2000 2350 50  0001 C CNN
+	1    2000 2350
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	2150 1750 2650 1750
+Wire Wire Line
+	2650 1950 2150 1950
+Wire Wire Line
+	2650 2150 2150 2150
+Wire Wire Line
+	2650 2350 2150 2350
+Text Label 2650 1750 2    50   ~ 0
+ICE_DAT
+Text Label 2650 1950 2    50   ~ 0
+ICE_CLK
+Text Label 2650 2150 2    50   ~ 0
+I2C0_SDA
+Text Label 2650 2350 2    50   ~ 0
+I2C0_SCL
+Wire Wire Line
+	1850 2350 1350 2350
+Wire Wire Line
+	1350 2350 1350 2150
+Wire Wire Line
+	1350 1750 1850 1750
+Connection ~ 1350 1750
+Wire Wire Line
+	1350 1750 1350 1550
+Wire Wire Line
+	1350 1950 1850 1950
+Connection ~ 1350 1950
+Wire Wire Line
+	1350 1950 1350 1750
+Wire Wire Line
+	1350 2150 1850 2150
+Connection ~ 1350 2150
+Wire Wire Line
+	1350 2150 1350 1950
+$Comp
+L NuDAC-rescue:+3V3-power #PWR016
+U 1 1 6087B779
+P 1350 1550
+F 0 "#PWR016" H 1350 1400 50  0001 C CNN
+F 1 "+3V3" H 1365 1723 50  0000 C CNN
+F 2 "" H 1350 1550 50  0001 C CNN
+F 3 "" H 1350 1550 50  0001 C CNN
+	1    1350 1550
+	1    0    0    -1  
+$EndComp
+Text Notes 1100 1200 0    100  Italic 20
+Pull-up resistor
+Text Notes 8100 1200 0    100  Italic 20
+Off page connection
+Wire Notes Line
+	8000 4500 8000 1000
+Wire Notes Line
+	10000 4500 8000 4500
+Wire Notes Line
+	10000 1000 10000 4500
+Wire Notes Line
+	8000 1000 10000 1000
+Text GLabel 9000 2300 2    50   Output ~ 0
+I2S_DO
+Text GLabel 9000 2200 2    50   Input ~ 0
+I2S_DI
+Text GLabel 9000 2100 2    50   Output ~ 0
+I2S_LRCK
+Text GLabel 9000 2000 2    50   Output ~ 0
+I2S_BCLK
+Text GLabel 9000 1900 2    50   Output ~ 0
+I2S_MCLK
+Wire Wire Line
+	8500 2300 9000 2300
+Text GLabel 9000 2400 2    50   Input ~ 0
+PB0
+Text GLabel 9000 2600 2    50   BiDi ~ 0
+I2C0_SDA
+Text GLabel 9000 2700 2    50   Output ~ 0
+I2C0_SCL
+Text GLabel 9000 4300 2    50   Input ~ 0
+nRESET
+Text GLabel 9000 4200 2    50   BiDi ~ 0
+ICE_CLK
+Text GLabel 9000 4100 2    50   BiDi ~ 0
+ICE_DAT
+Text GLabel 9000 4000 2    50   BiDi ~ 0
+PF5
+Text GLabel 9000 3900 2    50   BiDi ~ 0
+PF4
+Text GLabel 9000 3800 2    50   BiDi ~ 0
+PB15
+Text GLabel 9000 3700 2    50   BiDi ~ 0
+PB14
+Text GLabel 9000 3600 2    50   BiDi ~ 0
+PB13
+Text GLabel 9000 3500 2    50   BiDi ~ 0
+PB12
+Text GLabel 9000 3400 2    50   BiDi ~ 0
+PA15
+Text GLabel 9000 3300 2    50   BiDi ~ 0
+PA3
+Text GLabel 9000 3200 2    50   BiDi ~ 0
+PA2
+Text GLabel 9000 3100 2    50   BiDi ~ 0
+PA1
+Text GLabel 9000 3000 2    50   BiDi ~ 0
+PA0
+Text GLabel 9000 2900 2    50   Input ~ 0
+VDDIO
+Text Label 8500 4300 0    50   ~ 0
+nRESET
+Text Label 8500 4200 0    50   ~ 0
+ICE_CLK
+Text Label 8500 4100 0    50   ~ 0
+ICE_DAT
+Wire Wire Line
+	8500 4300 9000 4300
+Wire Wire Line
+	8500 4200 9000 4200
+Wire Wire Line
+	8500 4100 9000 4100
+Text Label 8500 4000 0    50   ~ 0
+PF5
+Text Label 8500 3900 0    50   ~ 0
+PF4
+Wire Wire Line
+	8500 4000 9000 4000
+Wire Wire Line
+	8500 3900 9000 3900
+Text Label 8500 3800 0    50   ~ 0
+PB15
+Text Label 8500 3700 0    50   ~ 0
+PB14
+Text Label 8500 3600 0    50   ~ 0
+PB13
+Text Label 8500 3500 0    50   ~ 0
+PB12
+Wire Wire Line
+	8500 3800 9000 3800
+Wire Wire Line
+	8500 3700 9000 3700
+Wire Wire Line
+	8500 3600 9000 3600
+Wire Wire Line
+	8500 3500 9000 3500
+Text Label 8500 3400 0    50   ~ 0
+PA15
+Wire Wire Line
+	8500 3400 9000 3400
+Text Label 8500 3300 0    50   ~ 0
+PA3
+Text Label 8500 3200 0    50   ~ 0
+PA2
+Text Label 8500 3100 0    50   ~ 0
+PA1
+Text Label 8500 3000 0    50   ~ 0
+PA0
+Text Label 8500 2900 0    50   ~ 0
+VDDIO
+Wire Wire Line
+	8500 3300 9000 3300
+Wire Wire Line
+	8500 3200 9000 3200
+Wire Wire Line
+	8500 3100 9000 3100
+Wire Wire Line
+	8500 3000 9000 3000
+Wire Wire Line
+	8500 2900 9000 2900
+Text Label 8500 2700 0    50   ~ 0
+I2C0_SCL
+Text Label 8500 2600 0    50   ~ 0
+I2C0_SDA
+Wire Wire Line
+	9000 2700 8500 2700
+Wire Wire Line
+	9000 2600 8500 2600
+Text Label 8500 2400 0    50   ~ 0
+PB0
+Wire Wire Line
+	8500 2400 9000 2400
+Text Label 8500 2000 0    50   ~ 0
+I2S0_BCLK
+Text Label 8500 1900 0    50   ~ 0
+I2S0_MCLK
+Text Label 8500 2300 0    50   ~ 0
+I2S0_DO
+Text Label 8500 2200 0    50   ~ 0
+I2S0_DI
+Text Label 8500 2100 0    50   ~ 0
+I2S0_LRCK
+Wire Wire Line
+	8500 2000 9000 2000
+Wire Wire Line
+	8500 1900 9000 1900
+Wire Wire Line
+	8500 2200 9000 2200
+Wire Wire Line
+	8500 2100 9000 2100
+Text Label 8500 1700 0    50   ~ 0
+USB_D+
+Text Label 8500 1600 0    50   ~ 0
+USB_D-
+Text Label 8500 1500 0    50   ~ 0
+USB_VBUS
+Wire Wire Line
+	8500 1700 9000 1700
+Wire Wire Line
+	8500 1600 9000 1600
+Wire Wire Line
+	8500 1500 9000 1500
+Wire Wire Line
+	7000 2600 6500 2600
+Wire Wire Line
+	4300 4600 4500 4600
+Wire Wire Line
+	6500 4600 7000 4600
+$Comp
+L M482ZGCAE:M482ZGCAE U3
+U 1 1 6070FDFC
+P 5500 3600
+F 0 "U3" H 5500 4965 50  0000 C CNN
+F 1 "M482ZGCAE" H 5500 4874 50  0000 C CNN
+F 2 "Package_DFN_QFN:VQFN-32-1EP_5x5mm_P0.5mm_EP3.5x3.5mm" H 5500 3600 50  0001 C CNN
+F 3 "" H 5500 3600 50  0001 C CNN
+	1    5500 3600
+	1    0    0    -1  
+$EndComp
+Text GLabel 9000 1600 2    50   BiDi ~ 0
+USB_DN
+Text GLabel 9000 1700 2    50   BiDi ~ 0
+USB_DP
+$Comp
+L power:VBUS #PWR026
+U 1 1 61134F3D
+P 9000 1500
+F 0 "#PWR026" H 9000 1350 50  0001 C CNN
+F 1 "VBUS" H 9015 1673 50  0000 C CNN
+F 2 "" H 9000 1500 50  0001 C CNN
+F 3 "" H 9000 1500 50  0001 C CNN
+	1    9000 1500
+	1    0    0    -1  
+$EndComp
+$Comp
+L NuDAC-rescue:+3V3-power #PWR0101
+U 1 1 60CE298D
+P 1650 5350
+F 0 "#PWR0101" H 1650 5200 50  0001 C CNN
+F 1 "+3V3" H 1665 5523 50  0000 C CNN
+F 2 "" H 1650 5350 50  0001 C CNN
+F 3 "" H 1650 5350 50  0001 C CNN
+	1    1650 5350
+	1    0    0    -1  
+$EndComp
+$EndSCHEMATC

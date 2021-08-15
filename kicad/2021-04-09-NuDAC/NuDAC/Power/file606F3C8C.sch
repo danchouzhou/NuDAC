@@ -1,0 +1,147 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 3 6
+Title "NuDAC"
+Date "2021-06-02"
+Rev "1.0.0"
+Comp "DANCHOUZHOU"
+Comment1 "Copyright © Danny Chou, all rights reserved."
+Comment2 "danchouzhou@gmail.com"
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L NuDAC-rescue:+5V-power #PWR?
+U 1 1 61127142
+P 4600 3750
+AR Path="/606F3289/61127142" Ref="#PWR?"  Part="1" 
+AR Path="/606F3C8D/61127142" Ref="#PWR010"  Part="1" 
+F 0 "#PWR?" H 4600 3600 50  0001 C CNN
+F 1 "+5V" H 4615 3923 50  0000 C CNN
+F 2 "" H 4600 3750 50  0001 C CNN
+F 3 "" H 4600 3750 50  0001 C CNN
+	1    4600 3750
+	1    0    0    -1  
+$EndComp
+Connection ~ 4800 3750
+Wire Wire Line
+	4600 3750 4800 3750
+$Comp
+L NuDAC-rescue:+3V3-power #PWR?
+U 1 1 6112713A
+P 6800 3750
+AR Path="/606F3289/6112713A" Ref="#PWR?"  Part="1" 
+AR Path="/606F3C8D/6112713A" Ref="#PWR014"  Part="1" 
+F 0 "#PWR?" H 6800 3600 50  0001 C CNN
+F 1 "+3V3" H 6815 3923 50  0000 C CNN
+F 2 "" H 6800 3750 50  0001 C CNN
+F 3 "" H 6800 3750 50  0001 C CNN
+	1    6800 3750
+	1    0    0    -1  
+$EndComp
+Connection ~ 6600 3750
+Wire Wire Line
+	6800 3750 6600 3750
+Wire Wire Line
+	6600 3750 6600 3950
+Wire Wire Line
+	6600 4450 6600 4250
+$Comp
+L NuDAC-rescue:GND-power #PWR?
+U 1 1 61127130
+P 6600 4450
+AR Path="/606F3289/61127130" Ref="#PWR?"  Part="1" 
+AR Path="/606F3C8D/61127130" Ref="#PWR013"  Part="1" 
+F 0 "#PWR?" H 6600 4200 50  0001 C CNN
+F 1 "GND" H 6605 4277 50  0000 C CNN
+F 2 "" H 6600 4450 50  0001 C CNN
+F 3 "" H 6600 4450 50  0001 C CNN
+	1    6600 4450
+	1    0    0    -1  
+$EndComp
+$Comp
+L NuDAC-rescue:C-Device C?
+U 1 1 6112712A
+P 6600 4100
+AR Path="/606F3289/6112712A" Ref="C?"  Part="1" 
+AR Path="/606F3C8D/6112712A" Ref="C4"  Part="1" 
+F 0 "C?" H 6715 4146 50  0000 L CNN
+F 1 "2.2uF" H 6715 4055 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 6638 3950 50  0001 C CNN
+F 3 "~" H 6600 4100 50  0001 C CNN
+	1    6600 4100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6400 3750 6600 3750
+Wire Wire Line
+	5200 3750 5400 3750
+Connection ~ 5200 3750
+Wire Wire Line
+	5200 4050 5400 4050
+Wire Wire Line
+	5200 3750 5200 4050
+$Comp
+L NuDAC-rescue:GND-power #PWR?
+U 1 1 6112711F
+P 5900 4450
+AR Path="/606F3289/6112711F" Ref="#PWR?"  Part="1" 
+AR Path="/606F3C8D/6112711F" Ref="#PWR012"  Part="1" 
+F 0 "#PWR?" H 5900 4200 50  0001 C CNN
+F 1 "GND" H 5905 4277 50  0000 C CNN
+F 2 "" H 5900 4450 50  0001 C CNN
+F 3 "" H 5900 4450 50  0001 C CNN
+	1    5900 4450
+	1    0    0    -1  
+$EndComp
+$Comp
+L NuDAC-rescue:GND-power #PWR?
+U 1 1 61127119
+P 4800 4450
+AR Path="/606F3289/61127119" Ref="#PWR?"  Part="1" 
+AR Path="/606F3C8D/61127119" Ref="#PWR011"  Part="1" 
+F 0 "#PWR?" H 4800 4200 50  0001 C CNN
+F 1 "GND" H 4805 4277 50  0000 C CNN
+F 2 "" H 4800 4450 50  0001 C CNN
+F 3 "" H 4800 4450 50  0001 C CNN
+	1    4800 4450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5900 4250 5900 4450
+Wire Wire Line
+	4800 3750 5200 3750
+Wire Wire Line
+	4800 4450 4800 4250
+Wire Wire Line
+	4800 3750 4800 3950
+$Comp
+L NuDAC-rescue:C-Device C?
+U 1 1 6112710F
+P 4800 4100
+AR Path="/606F3289/6112710F" Ref="C?"  Part="1" 
+AR Path="/606F3C8D/6112710F" Ref="C3"  Part="1" 
+F 0 "C?" H 4915 4146 50  0000 L CNN
+F 1 "2.2uF" H 4915 4055 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 4838 3950 50  0001 C CNN
+F 3 "~" H 4800 4100 50  0001 C CNN
+	1    4800 4100
+	1    0    0    -1  
+$EndComp
+$Comp
+L MCP1811:MCP1812BT-033_OT U?
+U 1 1 61127109
+P 5900 3900
+AR Path="/606F3289/61127109" Ref="U?"  Part="1" 
+AR Path="/606F3C8D/61127109" Ref="U2"  Part="1" 
+F 0 "U?" H 5900 4315 50  0000 C CNN
+F 1 "MCP1812BT-033_OT" H 5900 4224 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-23-5" H 5850 4900 50  0001 C CNN
+F 3 "" H 5850 4900 50  0001 C CNN
+	1    5900 3900
+	1    0    0    -1  
+$EndComp
+$EndSCHEMATC
