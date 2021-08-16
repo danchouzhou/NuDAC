@@ -1,0 +1,3 @@
+[submodule "firmware/M480BSP"]
+	path = firmware/M480BSP
+	url = https://github.com/OpenNuvoton/M480BSP
