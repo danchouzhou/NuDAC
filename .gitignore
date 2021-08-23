@@ -1,3 +1,10 @@
+# Firmware
+*.o
+*.map
+*.axf
+*.bin
+
+# User specified
 *.7z
 *.zip
 datasheet
