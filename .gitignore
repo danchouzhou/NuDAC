@@ -1,8 +1,12 @@
+# Temporarily
+firmware/NuDAC
+
 # Firmware
 *.o
 *.map
 *.axf
 *.bin
+.vscode
 
 # User specified
 *.7z
