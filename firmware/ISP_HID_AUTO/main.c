@@ -131,6 +131,9 @@ int32_t main(void)
             }
         }
 
+        /* Disable SysTick counter */
+        SysTick->CTRL = 0;
+
         goto _APROM;
     }
 
