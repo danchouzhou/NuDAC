@@ -60,13 +60,15 @@ void SYS_Init(void)
         CLK->CLKDIV0 = (CLK->CLKDIV0 & ~CLK_CLKDIV0_USBDIV_Msk) | CLK_CLKDIV0_USB(4);
     }
     CLK->CLKSEL0 = (CLK->CLKSEL0 & (~CLK_CLKSEL0_HCLKSEL_Msk)) | CLK_CLKSEL0_HCLKSEL_PLL;
+    CLK->CLKSEL0 = (CLK->CLKSEL0 & ~CLK_CLKSEL0_STCLKSEL_Msk) | CLK_CLKSEL0_STCLKSEL_HIRC_DIV2;
 
     /* Update System Core Clock */
     /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CycylesPerUs automatically. */
     //SystemCoreClockUpdate();
     PllClock        = PLL_CLOCK;                        // PLL
     SystemCoreClock = PLL_CLOCK / HCLK_DIV;             // HCLK
-    CyclesPerUs     = SystemCoreClock / 1000000;  // For SYS_SysTickDelay()
+    //CyclesPerUs     = SystemCoreClock / 1000000;  // For SYS_SysTickDelay()
+    CyclesPerUs     = 6000000 / 1000000;  // For SYS_SysTickDelay()
     /* Set both PCLK0 and PCLK1 as HCLK/2 */
     CLK->PCLKDIV = CLK_PCLKDIV_APB0DIV_DIV2 | CLK_PCLKDIV_APB1DIV_DIV2;
     /* Select USBD */
@@ -130,7 +132,7 @@ int32_t main(void)
     //CLK_SysTickDelay(300000);
     SysTick->LOAD = 300000 * CyclesPerUs;
     SysTick->VAL  = (0x00);
-    SysTick->CTRL = SysTick_CTRL_CLKSOURCE_Msk | SysTick_CTRL_ENABLE_Msk;
+    SysTick->CTRL = SysTick_CTRL_ENABLE_Msk;
 
     /* Waiting for down-count to zero */
     while ((SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk) == 0);
