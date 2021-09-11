@@ -37,6 +37,8 @@
 #define V6M_AIRCR_VECTKEY_DATA  0x05FA0000UL
 #define V6M_AIRCR_SYSRESETREQ       0x00000004UL
 
+extern uint8_t g_u8Connected;
+
 extern void GetDataFlashInfo(uint32_t *addr, uint32_t *size);
 extern uint32_t GetApromSize(void);
 extern int ParseCmd(unsigned char *buffer, uint8_t len);

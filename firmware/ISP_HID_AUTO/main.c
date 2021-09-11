@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include "targetdev.h"
 #include "hid_transfer.h"
+#include "isp_user.h"
 
 #define PLLCON_SETTING          CLK_PLLCTL_192MHz_HIRC
 #define PLL_CLOCK               192000000
@@ -99,7 +100,7 @@ int32_t main(void)
     g_apromSize = GetApromSize();
     GetDataFlashInfo(&g_dataFlashAddr, &g_dataFlashSize);
 
-    while (DetectPin == 0)
+    //while (DetectPin == 0)
     {
         /* Open USB controller */
         USBD_Open(&gsInfo, HID_ClassRequest, NULL);
@@ -113,7 +114,11 @@ int32_t main(void)
         /* DO NOT Enable USB device interrupt */
         // NVIC_EnableIRQ(USBD_IRQn);
 
-        while (DetectPin == 0)
+        SysTick->LOAD = 30000000 * CyclesPerUs; // 3 seconds
+        SysTick->VAL  = (0x00);
+        SysTick->CTRL = SysTick_CTRL_ENABLE_Msk;
+
+        while ( (g_u8Connected == 0) || ((SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk) == 0))
         {
             // polling USBD interrupt flag
             USBD_IRQHandler();

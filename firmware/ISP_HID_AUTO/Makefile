@@ -1,5 +1,5 @@
 include ./makefile.conf
-NAME=ISP_HID_PA15
+NAME=ISP_HID_AUTO
 
 STARTUP_DEFS=-D__STARTUP_CLEAR_BSS -D__START=main
 

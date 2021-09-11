@@ -16,6 +16,8 @@ __attribute__((aligned(4))) static uint8_t aprom_buf[FMC_FLASH_PAGE_SIZE];
 uint32_t bUpdateApromCmd;
 uint32_t g_apromSize, g_dataFlashAddr, g_dataFlashSize;
 
+uint8_t g_u8Connected = 1;
+
 static uint16_t Checksum(unsigned char *buf, int len)
 {
     int i;
@@ -87,6 +89,7 @@ int ParseCmd(unsigned char *buffer, uint8_t len)
     else if (lcmd == CMD_GET_DEVICEID)
     {
         outpw(response + 8, SYS->PDID);
+        g_u8Connected = 0;
         goto out;
     }
     else if (lcmd == CMD_RUN_APROM || lcmd == CMD_RUN_LDROM || lcmd == CMD_RESET)
