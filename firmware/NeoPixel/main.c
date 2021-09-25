@@ -7,8 +7,13 @@
 *****************************************************************************/
 #include <stdio.h>
 #include "NuMicro.h"
+#include "NeoPixel.h"
+#include "delay.h"
 
 #define PLL_CLOCK           192000000
+
+#define LED_PIN     PA15
+#define LED_COUNT   1
 
 void SYS_Init(void)
 {
@@ -62,12 +67,23 @@ void SYS_Init(void)
 
 int main()
 {
+    /* Create a NeoPixel objects */
+    STR_NEOPIXEL_T pixels;
 
     SYS_Init();
     /* Init UART to 115200-8n1 for print message */
     UART_Open(UART0, 115200);
     /* Connect UART to PC, and open a terminal tool to receive following message */
     printf("Hello World\n");
+
+    /* Initialize NeoPixel */
+    NeoPixel_begin(&pixels, LED_COUNT, &LED_PIN, NEO_GRB);
+
+    /* Set pixel color */
+    NeoPixel_setPixelColor(&pixels, 0, 12, 2, 16);
+
+    /* Update pixels color */
+    NeoPixel_show(&pixels);
 
     /* Got no where to go, just loop forever */
     while(1);
