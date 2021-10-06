@@ -487,4 +487,6 @@ Wire Wire Line
 Wire Wire Line
 	1600 4250 1600 4150
 NoConn ~ 2700 3850
+Text Notes 1650 4200 0    50   ~ 0
+MC74VHC1G50DF
 $EndSCHEMATC
