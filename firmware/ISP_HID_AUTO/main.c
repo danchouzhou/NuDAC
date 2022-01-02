@@ -34,8 +34,8 @@ void SYS_Init(void)
     /* Enable Internal RC clock and external XTAL clock */
     CLK->PWRCTL |= (CLK_PWRCTL_HXTEN_Msk | CLK_PWRCTL_HIRCEN_Msk);
 
-    /* Waiting for external XTAL clock ready */
-    //while (!(CLK->STATUS & CLK_STATUS_HXTSTB_Msk));
+    /* Waiting for internal RC clock ready */
+    while (!(CLK->STATUS & CLK_STATUS_HXTSTB_Msk));
 
     /* Set core clock as PLL_CLOCK from PLL */
     CLK->PLLCTL = PLLCON_SETTING;
@@ -61,6 +61,8 @@ void SYS_Init(void)
         CLK->CLKDIV0 = (CLK->CLKDIV0 & ~CLK_CLKDIV0_USBDIV_Msk) | CLK_CLKDIV0_USB(4);
     }
     CLK->CLKSEL0 = (CLK->CLKSEL0 & (~CLK_CLKSEL0_HCLKSEL_Msk)) | CLK_CLKSEL0_HCLKSEL_PLL;
+
+    /* SysTick clock source HIRC 12MHz / 2 = 6MHz */
     CLK->CLKSEL0 = (CLK->CLKSEL0 & ~CLK_CLKSEL0_STCLKSEL_Msk) | CLK_CLKSEL0_STCLKSEL_HIRC_DIV2;
 
     /* Update System Core Clock */
@@ -92,6 +94,7 @@ void USBD_IRQHandler(void);
 /*---------------------------------------------------------------------------------------------------------*/
 int32_t main(void)
 {
+    volatile uint32_t u32TimeOutCnt = 0;
     /* Unlock write-protected registers */
     SYS_UnlockReg();
     /* Init system and multi-function I/O */
@@ -100,21 +103,24 @@ int32_t main(void)
     g_apromSize = GetApromSize();
     GetDataFlashInfo(&g_dataFlashAddr, &g_dataFlashSize);
 
-    //while (DetectPin == 0)
+    /* Open USB controller */
+    USBD_Open(&gsInfo, HID_ClassRequest, NULL);
+    /*Init Endpoint configuration for HID */
+    HID_Init();
+    /* Start USB device */
+    USBD_Start();
+
+    /* Using polling mode and Removed Interrupt Table to reduce code size for M480 */
+
+    /* DO NOT Enable USB device interrupt */
+    // NVIC_EnableIRQ(USBD_IRQn);
+
+_ISP:
+    if(u32TimeOutCnt < 3) // perform three times
     {
-        /* Open USB controller */
-        USBD_Open(&gsInfo, HID_ClassRequest, NULL);
-        /*Init Endpoint configuration for HID */
-        HID_Init();
-        /* Start USB device */
-        USBD_Start();
+        u32TimeOutCnt++;
 
-        /* Using polling mode and Removed Interrupt Table to reduce code size for M480 */
-
-        /* DO NOT Enable USB device interrupt */
-        // NVIC_EnableIRQ(USBD_IRQn);
-
-        SysTick->LOAD = 30000000 * CyclesPerUs; // 3 seconds
+        SysTick->LOAD = 1000000 * CyclesPerUs; // 1 seconds
         SysTick->VAL  = (0x00);
         SysTick->CTRL = SysTick_CTRL_ENABLE_Msk;
 
@@ -130,20 +136,16 @@ int32_t main(void)
                 bUsbDataReady = FALSE;
             }
         }
-
+        
         /* Disable SysTick counter */
         SysTick->CTRL = 0;
-
+    }
+    else
+    {
         goto _APROM;
     }
 
-    //CLK_SysTickDelay(300000);
-    SysTick->LOAD = 300000 * CyclesPerUs;
-    SysTick->VAL  = (0x00);
-    SysTick->CTRL = SysTick_CTRL_ENABLE_Msk;
-
-    /* Waiting for down-count to zero */
-    while ((SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk) == 0);
+    goto _ISP;
 
 _APROM:
     outpw(&SYS->RSTSTS, 3);//clear bit
