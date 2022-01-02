@@ -33,8 +33,8 @@ void SYS_Init(void)
     /* Enable Internal RC clock and external XTAL clock */
     CLK->PWRCTL |= (CLK_PWRCTL_HXTEN_Msk | CLK_PWRCTL_HIRCEN_Msk);
 
-    /* Waiting for external XTAL clock ready */
-    //while (!(CLK->STATUS & CLK_STATUS_HXTSTB_Msk));
+    /* Waiting for internal RC clock ready */
+    while (!(CLK->STATUS & CLK_STATUS_HIRCSTB_Msk));
 
     /* Set core clock as PLL_CLOCK from PLL */
     CLK->PLLCTL = PLLCON_SETTING;
