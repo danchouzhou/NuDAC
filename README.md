@@ -28,7 +28,7 @@ A USB codec based on Nuvoton M482ZGCAE MCU and NAU88L25YGB I2S audio codec
 - 28mW output power (@ 32 ohm, 1% THD+N)  
 
 ## Specification
-- Power supply: 4.5~5.5V, 1A max  
+- 5V power supply: 4.5~5.5V, 1A max  
 - 5V output capacity: 1A max
 - VDD output capacity: 300mA max
 
