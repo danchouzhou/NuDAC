@@ -154,5 +154,7 @@ _APROM:
 
     /* Trap the CPU */
     while (1);
+
+    return 0;
 }
 /*** (C) COPYRIGHT 2017 Nuvoton Technology Corp. ***/
