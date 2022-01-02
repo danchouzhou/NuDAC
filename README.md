@@ -4,14 +4,14 @@ A USB codec based on Nuvoton M482ZGCAE MCU and NAU88L25YGB I2S audio codec
 
 ## Fetures
 ### Design
-- Provid almost all of MCU I/O on pin header  
+- Provide almost all of MCU I/O on pin header  
 - Low noise & fail-safe power design  
 - Four-layer PCB  
 - Low profile mid mount THT phone jack  
 - On board APA ELECTRONIC CO., LTD. patented RGB LED with level translator  
 - Molex USB 2.0 through hole Type-C connector improve mechanical strength  
 - Jump free Nu-Link connectivity
-- Support semi-auto USB ISP (by pressing reset button) provid firmware update and secondary development without a programmer  
+- Support semi-auto USB ISP (by pressing reset button) provide firmware update and secondary development without a programmer  
 ### Nuvoton M482ZGCAE microcontroller  
 - ARM Cortex-M4 processor up to 192MHz with float point unit and DSP  
 - 16-channel programable peripheral direct memory access  
