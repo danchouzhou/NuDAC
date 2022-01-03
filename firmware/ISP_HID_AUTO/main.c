@@ -35,7 +35,7 @@ void SYS_Init(void)
     CLK->PWRCTL |= (CLK_PWRCTL_HXTEN_Msk | CLK_PWRCTL_HIRCEN_Msk);
 
     /* Waiting for internal RC clock ready */
-    while (!(CLK->STATUS & CLK_STATUS_HXTSTB_Msk));
+    while (!(CLK->STATUS & CLK_STATUS_HIRCSTB_Msk));
 
     /* Set core clock as PLL_CLOCK from PLL */
     CLK->PLLCTL = PLLCON_SETTING;
