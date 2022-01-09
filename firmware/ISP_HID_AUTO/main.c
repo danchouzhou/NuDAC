@@ -148,9 +148,10 @@ void NeoPixelShow_HCLK_192MHz(volatile uint32_t *pu32pdio, uint32_t u32color)
         while(SysTick->VAL <= ticks);           // Wait for rollover to 'top'
     }
 
-    SysTick->LOAD = saveLoad;           // Restore SysTick config
-    SysTick->VAL  = saveVal;            // Restore SysTick value
-    SysTick->CTRL = saveCtrl;           // Restore SysTick control register
+    /* Restore SysTick config */
+    SysTick->LOAD = saveLoad;
+    SysTick->VAL  = saveVal;
+    SysTick->CTRL = saveCtrl;
 
     /* Turn the interrupt back */
     //__enable_irq();
