@@ -84,8 +84,76 @@ void SYS_Init(void)
     /*---------------------------------------------------------------------------------------------------------*/
     /* Set PA.12 ~ PA.14 to input mode */
     PA->MODE &= ~(GPIO_MODE_MODE12_Msk | GPIO_MODE_MODE13_Msk | GPIO_MODE_MODE14_Msk);
-    SYS->GPA_MFPH &= ~(SYS_GPA_MFPH_PA12MFP_Msk | SYS_GPA_MFPH_PA13MFP_Msk | SYS_GPA_MFPH_PA14MFP_Msk | SYS_GPA_MFPH_PA15MFP_Msk);
-    SYS->GPA_MFPH |= (SYS_GPA_MFPH_PA12MFP_USB_VBUS | SYS_GPA_MFPH_PA13MFP_USB_D_N | SYS_GPA_MFPH_PA14MFP_USB_D_P | SYS_GPA_MFPH_PA15MFP_USB_OTG_ID);
+    SYS->GPA_MFPH &= ~(SYS_GPA_MFPH_PA12MFP_Msk | SYS_GPA_MFPH_PA13MFP_Msk | SYS_GPA_MFPH_PA14MFP_Msk);
+    SYS->GPA_MFPH |= (SYS_GPA_MFPH_PA12MFP_USB_VBUS | SYS_GPA_MFPH_PA13MFP_USB_D_N | SYS_GPA_MFPH_PA14MFP_USB_D_P);
+}
+
+void NeoPixelShow_HCLK_192MHz(volatile uint32_t *pu32pdio, uint32_t u32color)
+{
+    uint32_t bitMask = 0x800000;
+    uint32_t t0, t1, top, ticks, saveLoad, saveVal, saveCtrl;
+
+    GPIO_T *port;
+    uint32_t pin;
+
+    /* Get port and pin from PDIO */
+    port = (GPIO_T *)( ( ( (uint32_t)pu32pdio - GPIO_PIN_DATA_BASE) & 0x1C0) + GPIOA_BASE);
+    pin = ( ( (uint32_t)pu32pdio - GPIO_PIN_DATA_BASE) & 0x3F) >> 2;
+
+    port->MODE = (port->MODE & ~( (GPIO_MODE_QUASI) << ( (pin)<<1)) | ( (GPIO_MODE_OUTPUT) << ( (pin)<<1)));
+
+    *pu32pdio = 0; // PDIO output low
+
+    /* No needed in polling mode */
+    /* Disable all interrupts force the timming */
+    //__disable_irq();
+
+    saveLoad = SysTick->LOAD; 
+    saveVal = SysTick->VAL;
+    saveCtrl = SysTick->CTRL;
+
+    // Wait for 300us present a reset sequence
+    SysTick->LOAD = 57600; // 192MHz * 300
+    SysTick->VAL  = (0x00);
+
+    /* Switch the clock source to HCLK and enable SysTick Timer */
+    SysTick->CTRL = SysTick_CTRL_CLKSOURCE_Msk | SysTick_CTRL_ENABLE_Msk;
+
+    /* Waiting for down-count to zero */
+    while ((SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk) == 0);
+
+    /*
+    F_CPU = CLK_GetCPUFreq();
+
+    top =       (uint32_t)(F_CPU * 0.00000125); // Bit hi + lo = 1.25 uS
+    t0  = top - (uint32_t)(F_CPU * 0.00000040); // 0 = 0.4 uS hi
+    t1  = top - (uint32_t)(F_CPU * 0.00000080); // 1 = 0.8 uS hi
+    */
+    top = 240;
+    t0 = 164;
+    t1 = 87;   
+    
+    SysTick->LOAD = top;               // Config SysTick for NeoPixel bit freq
+    SysTick->VAL  = top;               // Set to start value (counts down)
+    (void)SysTick->VAL;                // Dummy read helps sync up 1st bit
+
+    for(;;) {
+        *pu32pdio  = 1;                         // Set output high
+        ticks = (u32color & bitMask) ? t1 : t0;    // SysTick threshold,
+        while(SysTick->VAL > ticks);            // wait for it
+        *pu32pdio  = 0;                         // Set output low
+        if(!(bitMask >>= 1)) {                  // Next bit for this color...done?
+            break;                              // Exit the loop
+        }
+        while(SysTick->VAL <= ticks);           // Wait for rollover to 'top'
+    }
+
+    SysTick->LOAD = saveLoad;           // Restore SysTick rollover to 1 ms
+    SysTick->VAL  = saveVal;            // Restore SysTick value
+    SysTick->CTRL = saveCtrl;           // Restore SysTick control register
+
+    /* Turn the interrupt back */
+    //__enable_irq();
 }
 
 void USBD_IRQHandler(void);
@@ -115,14 +183,17 @@ int32_t main(void)
     /* DO NOT Enable USB device interrupt */
     // NVIC_EnableIRQ(USBD_IRQn);
 
-_ISP:
-    if(u32TimeOutCnt < 3) // perform three times
+    while(u32TimeOutCnt++ < 30) // perform three seconds
     {
-        u32TimeOutCnt++;
-
-        SysTick->LOAD = 1000000 * CyclesPerUs; // 1 seconds
+        //SysTick->LOAD = 100000 * CyclesPerUs; // 0.1 second
+        SysTick->LOAD = 600000;
         SysTick->VAL  = (0x00);
         SysTick->CTRL = SysTick_CTRL_ENABLE_Msk;
+
+        if(u32TimeOutCnt & 0x1)
+            NeoPixelShow_HCLK_192MHz(&PA15, 0x1400); // Red
+        else
+            NeoPixelShow_HCLK_192MHz(&PA15, 0x0);
 
         while ( (g_u8Connected == 0) || ((SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk) == 0))
         {
@@ -131,6 +202,7 @@ _ISP:
 
             if (bUsbDataReady == TRUE)
             {
+                NeoPixelShow_HCLK_192MHz(&PA15, 0x120000); // Green
                 ParseCmd((uint8_t *)usb_rcvbuf, 64);
                 EP2_Handler();
                 bUsbDataReady = FALSE;
@@ -140,14 +212,17 @@ _ISP:
         /* Disable SysTick counter */
         SysTick->CTRL = 0;
     }
-    else
-    {
-        goto _APROM;
-    }
 
-    goto _ISP;
+    /* Pin data I/O, color 0xGGRRBB */
+    NeoPixelShow_HCLK_192MHz(&PA15, 0x020c0c); // Purple
 
-_APROM:
+    SysTick->LOAD = 1800;  // wait 300us
+    SysTick->VAL  = (0x00);
+    SysTick->CTRL = SysTick_CTRL_ENABLE_Msk;
+
+    /* Waiting for down-count to zero */
+    while ((SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk) == 0);
+
     outpw(&SYS->RSTSTS, 3);//clear bit
     outpw(&FMC->ISPCTL, inpw(&FMC->ISPCTL) & 0xFFFFFFFC);
     outpw(&SCB->AIRCR, (V6M_AIRCR_VECTKEY_DATA | V6M_AIRCR_SYSRESETREQ));
