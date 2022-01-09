@@ -139,7 +139,7 @@ void NeoPixelShow_HCLK_192MHz(volatile uint32_t *pu32pdio, uint32_t u32color)
 
     for(;;) {
         *pu32pdio  = 1;                         // Set output high
-        ticks = (u32color & bitMask) ? t1 : t0;    // SysTick threshold,
+        ticks = (u32color & bitMask) ? t1 : t0; // SysTick threshold,
         while(SysTick->VAL > ticks);            // wait for it
         *pu32pdio  = 0;                         // Set output low
         if(!(bitMask >>= 1)) {                  // Next bit for this color...done?
@@ -148,7 +148,7 @@ void NeoPixelShow_HCLK_192MHz(volatile uint32_t *pu32pdio, uint32_t u32color)
         while(SysTick->VAL <= ticks);           // Wait for rollover to 'top'
     }
 
-    SysTick->LOAD = saveLoad;           // Restore SysTick rollover to 1 ms
+    SysTick->LOAD = saveLoad;           // Restore SysTick config
     SysTick->VAL  = saveVal;            // Restore SysTick value
     SysTick->CTRL = saveCtrl;           // Restore SysTick control register
 
