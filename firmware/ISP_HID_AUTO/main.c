@@ -29,10 +29,9 @@ void SYS_Init(void)
     /*---------------------------------------------------------------------------------------------------------*/
     /* Init System Clock                                                                                       */
     /*---------------------------------------------------------------------------------------------------------*/
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
-    /* Enable Internal RC clock and external XTAL clock */
-    CLK->PWRCTL |= (CLK_PWRCTL_HXTEN_Msk | CLK_PWRCTL_HIRCEN_Msk);
+
+    /* Enable Internal RC clock */
+    CLK->PWRCTL |= CLK_PWRCTL_HIRCEN_Msk;
 
     /* Waiting for internal RC clock ready */
     while (!(CLK->STATUS & CLK_STATUS_HIRCSTB_Msk));
@@ -40,12 +39,13 @@ void SYS_Init(void)
     /* Set core clock as PLL_CLOCK from PLL */
     CLK->PLLCTL = PLLCON_SETTING;
 
+    /* Waiting for PLL clock ready */
     while (!(CLK->STATUS & CLK_STATUS_PLLSTB_Msk));
 
-    CLK->CLKDIV0 &= ~CLK_CLKDIV0_HCLKDIV_Msk;
-    CLK->CLKDIV0 |= CLK_CLKDIV0_HCLK(HCLK_DIV);
-    //CLK->CLKDIV0 &= ~CLK_CLKDIV0_USBDIV_Msk;
-    //CLK->CLKDIV0 |= CLK_CLKDIV0_USB(USBD_DIV);
+    /* Select HCLK */
+    CLK->CLKSEL0 = (CLK->CLKSEL0 & ~(CLK_CLKSEL0_HCLKSEL_Msk)) | CLK_CLKSEL0_HCLKSEL_PLL;
+    CLK->CLKDIV0 = (CLK->CLKDIV0 & ~(CLK_CLKDIV0_HCLKDIV_Msk)) | CLK_CLKDIV0_HCLK(HCLK_DIV);
+
     /* M480LD support crystal-less */
     if (((SYS->CSERVER & SYS_CSERVER_VERSION_Msk) == 0x1) && (CRYSTAL_LESS))
     {
@@ -60,7 +60,6 @@ void SYS_Init(void)
         CLK->CLKSEL0 |= CLK_CLKSEL0_USBSEL_Msk;
         CLK->CLKDIV0 = (CLK->CLKDIV0 & ~CLK_CLKDIV0_USBDIV_Msk) | CLK_CLKDIV0_USB(4);
     }
-    CLK->CLKSEL0 = (CLK->CLKSEL0 & (~CLK_CLKSEL0_HCLKSEL_Msk)) | CLK_CLKSEL0_HCLKSEL_PLL;
 
     /* SysTick clock source HIRC 12MHz / 2 = 6MHz */
     CLK->CLKSEL0 = (CLK->CLKSEL0 & ~CLK_CLKSEL0_STCLKSEL_Msk) | CLK_CLKSEL0_STCLKSEL_HIRC_DIV2;
@@ -70,15 +69,18 @@ void SYS_Init(void)
     //SystemCoreClockUpdate();
     PllClock        = PLL_CLOCK;                        // PLL
     SystemCoreClock = PLL_CLOCK / HCLK_DIV;             // HCLK
-    //CyclesPerUs     = SystemCoreClock / 1000000;  // For SYS_SysTickDelay()
-    CyclesPerUs     = 6000000 / 1000000;  // For SYS_SysTickDelay()
+    CyclesPerUs     = SystemCoreClock / 1000000;  // For SYS_SysTickDelay()
+
     /* Set both PCLK0 and PCLK1 as HCLK/2 */
     CLK->PCLKDIV = CLK_PCLKDIV_APB0DIV_DIV2 | CLK_PCLKDIV_APB1DIV_DIV2;
+
     /* Select USBD */
     SYS->USBPHY = (SYS->USBPHY & ~SYS_USBPHY_USBROLE_Msk) | SYS_USBPHY_USBEN_Msk | SYS_USBPHY_SBO_Msk;
+
     /* Enable module clock */
     CLK->APBCLK0 |= CLK_APBCLK0_USBDCKEN_Msk;
     CLK->AHBCLK |= CLK_AHBCLK_ISPCKEN_Msk;
+
     /*---------------------------------------------------------------------------------------------------------*/
     /* Init I/O Multi-function                                                                                 */
     /*---------------------------------------------------------------------------------------------------------*/
