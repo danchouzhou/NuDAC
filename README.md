@@ -23,6 +23,7 @@ A USB codec based on Nuvoton M482ZGCAE MCU and NAU88L25YGB I2S audio codec
 ### Nuvoton NAU88L25YGB high performance audio codec
 - On chip ground referenced Class-A/AB/G selectable headphone amplifier
 - On chip DSP include DRC (Dynamic Range Compressor), and programmable biquad filters  
+- 24-bit A/D and D/A signal processing unit, up to 192K sample rate  
 - 124dB SNR (@ 1Vrms, 0dB gain, 1KHz)  
 - THD+Noise -89dB (@ 32 ohm, 1KHz, 20mW)  
 - 28mW output power (@ 32 ohm, 1% THD+N)  
