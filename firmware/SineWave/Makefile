@@ -5,11 +5,11 @@ STARTUP_DEFS=-D__STARTUP_CLEAR_BSS -D__START=main
 
 # Need following option for LTO as LTO will treat retarget functions as
 # unused without following option
-CFLAGS+=-fno-builtin
+CFLAGS+=-fno-builtin -D ARM_MATH_CM4
 
 LDSCRIPTS=-L. -L$(BASE)Library/Device/Nuvoton/M480/Source/GCC -T gcc_arm_128k.ld
 
-LFLAGS=$(USE_NANO) $(USE_NOHOST) $(LDSCRIPTS) $(GC) $(MAP)
+LFLAGS=$(USE_NANO) $(USE_NOHOST) $(LDSCRIPTS) $(GC) $(MAP) -u _printf_float
 
 #$(NAME)-$(CORE).axf: main.c $(NAME).c $(STARTUP)
 #	$(CC) $^ $(CFLAGS) $(LFLAGS) -o $@
@@ -21,6 +21,7 @@ IPATH= \
 	User
 SRC=$(wildcard \
 	*.c \
+	../M480BSP/Library/CMSIS/DSP_Lib/Source/*/*.c \
 	../M480BSP/Library/Device/Nuvoton/M480/Source/*.c \
 	../M480BSP/Library/Device/Nuvoton/M480/Source/GCC/*.c \
 	../M480BSP/Library/StdDriver/src/*.c \

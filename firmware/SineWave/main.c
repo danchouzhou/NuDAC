@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include "NuMicro.h"
+#include <math.h>
+#include "arm_math.h"
 
 #define CRYSTAL_LESS        1
 
@@ -75,6 +77,10 @@ void SYS_Init(void)
 
 void main(void)
 {
+    float32_t sinOutput;
+    q15_t q15sinOutput;
+    q31_t q31sinOutput;
+
     /* Unlock protected registers */
     SYS_UnlockReg();
 
@@ -88,7 +94,16 @@ void main(void)
     UART_Open(UART0, 115200);
 
     /* Connect UART to PC, and open a terminal tool to receive following message */
-    printf("\r\nSine wave generator.\n");
+    printf("\r\nSine wave generator.\n\r");
+
+    sinOutput = arm_sin_f32(PI/4.0);  // 45 degree
+    printf("arm_sin_f32(PI/4.0) = %f\r\n", sinOutput); // sqrt(2)
+
+    q15sinOutput = arm_sin_q15(4096); // 360 degree * 4,096 / 2^15 = 45 degree
+    printf("arm_sin_q15(4096) = %d\r\n", q15sinOutput); // 2^15 * sqrt(2) = 23,170
+
+    q31sinOutput = arm_sin_q31(268435456); // 360 degree * 268,435,456 / 4,294,967,296 = 45 degree
+    printf("arm_sin_q31(536870912) = %d\r\n", q31sinOutput); // 2^31 * sqrt(2) = 1,518,500,249.98 ~1,518,500,250
 
     /* Trap the CPU */
     while (1);
