@@ -21,19 +21,26 @@ IPATH= \
 	User
 SRC=$(wildcard \
 	*.c \
+	./User/*.c \
+)
+SRC_LIB=$(wildcard \
 	../M480BSP/Library/CMSIS/DSP_Lib/Source/*/*.c \
 	../M480BSP/Library/Device/Nuvoton/M480/Source/*.c \
 	../M480BSP/Library/Device/Nuvoton/M480/Source/GCC/*.c \
 	../M480BSP/Library/StdDriver/src/*.c \
-	./User/*.c \
 )
 OBJS = $(patsubst %.c,./Objects/%.o,$(notdir $(SRC)))
+OBJS_LIB = $(patsubst %.c,./Objects/%.o,$(notdir $(SRC_LIB)))
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(OBJS_LIB)
 	cd ./Objects && $(CC) *.o $(CFLAGS) $(LFLAGS) $(STARTUP) -o $@.axf $(addprefix -I ../,$(IPATH)) 
 	$(CP) -O binary ./Objects/$@.axf ./Objects/$@.bin
 
 $(OBJS): $(SRC)
+	mkdir -p ./Objects
+	cd ./Objects && $(CC) $(addprefix ../,$^) $(CFLAGS) -c $(addprefix -I ../,$(IPATH))
+
+$(OBJS_LIB): $(SRC_LIB)
 	mkdir -p ./Objects
 	cd ./Objects && $(CC) $(addprefix ../,$^) $(CFLAGS) -c $(addprefix -I ../,$(IPATH))
 
