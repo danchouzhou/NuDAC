@@ -94,7 +94,7 @@ void main(void)
     UART_Open(UART0, 115200);
 
     /* Connect UART to PC, and open a terminal tool to receive following message */
-    printf("\r\nSine wave generator.\n\r");
+    printf("\r\nSine wave generator.\r\n");
 
     sinOutput = arm_sin_f32(PI/4.0);  // 45 degree
     printf("arm_sin_f32(PI/4.0) = %f\r\n", sinOutput); // sqrt(2)
