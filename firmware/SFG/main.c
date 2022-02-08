@@ -2,6 +2,7 @@
 #include "NuMicro.h"
 #include <math.h>
 #include "arm_math.h"
+#include "audio_codec.h"
 
 #define CRYSTAL_LESS        1
 
@@ -75,8 +76,31 @@ void SYS_Init(void)
     PC->SMTEN |= GPIO_SMTEN_SMTEN1_Msk;
 }
 
+/* Init I2C interface */
+void I2C0_Init(void)
+{
+    /* Open I2C2 and set clock to 100k */
+    I2C_Open(I2C0, 100000);
+
+    /* Get I2C2 Bus Clock */
+    printf("I2C clock  %d Hz\n", I2C_GetBusClockFreq(I2C0));
+}
+
+/* Init I2S interface */
+void I2S0_Init(void)
+{
+    /* Open I2S0 as slave mode */
+    I2S_Open(I2S0, I2S_MODE_SLAVE, 48000, I2S_DATABIT_16, I2S_DISABLE_MONO, I2S_FORMAT_I2S);
+
+    /* Set MCLK and enable MCLK */
+    printf("I2S MCLK %d Hz\r\n", I2S_EnableMCLK(I2S0, 12000000));
+}
+
 void main(void)
 {
+    q15_t q15sineTable[48];
+    uint32_t index, data = 0;
+
     /* Unlock protected registers */
     SYS_UnlockReg();
 
@@ -90,8 +114,57 @@ void main(void)
     UART_Open(UART0, 115200);
 
     /* Connect UART to PC, and open a terminal tool to receive following message */
-    printf("\r\nSignal Function Generator.\r\n");
+    printf("\r\nFunction generator.\r\n");
 
-    /* Trap the CPU */
-    while (1);
+    /* Init I2C0 */
+    I2C0_Init();
+
+    /* Init I2S0 */
+    I2S0_Init();
+
+    /* Reset the audio codec by software */
+    NAU88L25_Reset();
+
+    /* Initialize NAU88L25 codec */
+    NAU88L25_Setup();
+
+    /*
+    printf("Select a waveform.\r\n");
+    printf("[0] Square wave\r\n");
+    printf("[1] Triangle wave\r\n");
+    printf("[2] Sine wave\r\n");
+
+    printf("\r\nEnter a frequency between 20 Hz and 20000 Hz: ");
+    */
+
+    /* Create sine table */
+    for (int p=0; p<48; p++)
+    {
+        q15_t t = 32768UL*p/48;
+        q15sineTable[p] = arm_sin_q15(t);
+        printf("%02d: arm_sin_q15(%d) = 0x%04x\r\n", p, t, (uint16_t)q15sineTable[p]);
+    }
+
+    I2S_CLR_TX_FIFO(I2S0);
+    I2S_ENABLE_TX(I2S0);
+
+    /* Fill I2S_TXFIFO */
+    while (1)
+    {
+        /* Check if I2S_TXFIFO is not full */
+        if (I2S_GET_INT_FLAG(I2S0, I2S_STATUS0_TXFULL_Msk) == 0)
+        {
+            /* Write left and right channel with same data */
+            data = (uint32_t)q15sineTable[index] << 16;
+            data |= (uint32_t)q15sineTable[index] & 0xFFFFUL;
+            I2S_WRITE_TX_FIFO(I2S0, data);
+
+            //printf("%02d: 0x%08x\n", index, data);
+
+            /* Increase or loop back the index */
+            index++;
+            if (index >= 48)
+                index = 0;
+        }        
+    }
 }
