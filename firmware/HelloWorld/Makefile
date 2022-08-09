@@ -9,7 +9,7 @@ STARTUP_DEFS=-D__STARTUP_CLEAR_BSS -D__START=main
 #CFLAGS+=-fno-builtin -D ARM_MATH_CM4 -mfloat-abi=soft
 CFLAGS+=-fno-builtin -D ARM_MATH_CM4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -D __FPU_PRESENT=1
 
-LDSCRIPTS=-L. -L$(BASE)Library/Device/Nuvoton/M480/Source/GCC -T gcc_arm.ld
+LDSCRIPTS=-L. -L$(BASE)Library/Device/Nuvoton/M480/Source/GCC -T gcc_arm_128k.ld
 
 LFLAGS=$(USE_NANO) $(USE_NOHOST) $(LDSCRIPTS) $(GC) $(MAP)
 
